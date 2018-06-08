@@ -12,9 +12,14 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+  return view('welcome');
 });
 
-Auth::routes();
+Route::get('/home', function () {
+    return view('home');
+})->name('home');
 
-Route::get('/home', 'HomeController@index')->name('home');
+// Auth::routes();
+
+// Route::get('/{any}', 'SpaController@index')->where('any', '.*');
+Route::get('/login-page', 'SpaController@index')->where('any', '.*');

@@ -3,6 +3,9 @@ import home from './pages/home.vue';
 import about from './pages/about.vue';
 import dashboard from './pages/dashboard.vue';
 import login from './pages/login.vue';
+import settings from './pages/settings/index.vue';
+import profile from './pages/settings/profile.vue';
+import password from './pages/settings/password.vue';
 
 const routes = [
   {
@@ -20,6 +23,13 @@ const routes = [
     path: '/dashboard',
     name: 'dashboard',
     component: dashboard,
+    meta: { middlewareAuth: true }
+  },
+  { path: '/settings', name: 'settings', component: settings, children: [
+      { path: '', redirect: { name: 'settings.profile' }},
+      { path: 'profile', name: 'settings.profile', component: profile },
+      { path: 'password', name: 'settings.password', component: password }
+    ],
     meta: { middlewareAuth: true }
   },
   {
@@ -41,7 +51,6 @@ router.beforeEach((to, from, next) => {
         path: '/login',
         query: { redirect: to.fullPath }
       });
-
       return;
     }
   }

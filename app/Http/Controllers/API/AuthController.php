@@ -9,7 +9,6 @@ use App\Http\Controllers\Controller;
 
 class AuthController extends Controller
 {
-  // Request $request
   public function login()
   {
     $user = User::whereEmail(request('username'))->first();
@@ -48,7 +47,6 @@ class AuthController extends Controller
 
     $data = json_decode($response->getContent());
 
-    // Format the final response in a desirable format
     return response()->json([
       'token' => $data->access_token,
       'user' => $user,

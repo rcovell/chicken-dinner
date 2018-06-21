@@ -1,23 +1,27 @@
 <template>
   <div>
-    <div class="top-right links">
-      <template v-if="authenticated">
-        <router-link :to="{ name: 'home' }">
-          Home
-        </router-link> |
-        <router-link :to="{ name: 'dashboard' }">Dashboard</router-link> |
-        <a @click.prevent="logout" class="dropdown-item pl-3"  href="logout">
-          Logout
-        </a>
-      </template>
-      <template v-else>
-        <router-link :to="{ name: 'login' }">
-          Login
-        </router-link>
-        <!-- <router-link :to="{ name: 'register' }">
-          {{ $t('register') }}
-        </router-link> -->
-      </template>
+    <div class="container">
+      <div class="row">
+        <div class="top-right links">
+          <router-link :to="{ name: 'home' }">Home</router-link> |
+          <router-link :to="{ name: 'about' }">About</router-link> |
+          <span v-if="authenticated">
+            <router-link :to="{ name: 'dashboard' }">Dashboard</router-link> |
+            <router-link :to="{ name: 'settings' }">Settings</router-link> |
+            <a @click.prevent="logout" class="dropdown-item pl-3"  href="logout">
+              Logout
+            </a>
+          </span>
+          <span v-else>
+            <router-link :to="{ name: 'login' }">
+              Login
+            </router-link>
+            <!-- <router-link :to="{ name: 'register' }">
+              {{ $t('register') }}
+            </router-link> -->
+          </span>
+        </div>
+      </div>
     </div>
     <!-- <div class="container">
       <div class="row">
@@ -79,11 +83,11 @@
 
 <style lang="scss">
 .top-right {
-  // text-align: right;
-  position: absolute;
-  right: 10px;
-  top: 18px;
-  z-index: 100;
+  text-align: right;
+  // position: absolute;
+  // right: 10px;
+  // top: 18px;
+  // z-index: 100;
 }
 
 // .basic-layout {

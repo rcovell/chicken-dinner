@@ -3,11 +3,11 @@
     <div class="container">
       <div class="row">
         <div class="top-right links">
-          <router-link :to="{ name: 'home' }">Home</router-link> |
-          <router-link :to="{ name: 'about' }">About</router-link> |
+          <router-link :to="{ name: 'home' }" class="nav-link" active-class="active">Home</router-link> |
+          <router-link :to="{ name: 'about' }" class="nav-link" active-class="active">About</router-link> |
           <span v-if="authenticated">
-            <router-link :to="{ name: 'dashboard' }">Dashboard</router-link> |
-            <router-link :to="{ name: 'settings' }">Settings</router-link> |
+            <router-link :to="{ name: 'dashboard' }" class="nav-link" active-class="active">Dashboard</router-link> |
+            <router-link :to="{ name: 'settings.profile' }">Settings</router-link> |
             <a @click.prevent="logout" class="dropdown-item pl-3"  href="logout">
               Logout
             </a>

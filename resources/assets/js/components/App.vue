@@ -1,6 +1,25 @@
 <template>
   <div>
-    <div class="container">
+    <div class="top-right links">
+      <template v-if="authenticated">
+        <router-link :to="{ name: 'home' }">
+          Home
+        </router-link> |
+        <router-link :to="{ name: 'dashboard' }">Dashboard</router-link> |
+        <a @click.prevent="logout" class="dropdown-item pl-3"  href="logout">
+          Logout
+        </a>
+      </template>
+      <template v-else>
+        <router-link :to="{ name: 'login' }">
+          Login
+        </router-link>
+        <!-- <router-link :to="{ name: 'register' }">
+          {{ $t('register') }}
+        </router-link> -->
+      </template>
+    </div>
+    <!-- <div class="container">
       <div class="row">
         <div class="col-xs-12">
           <div class="top-right links">
@@ -18,7 +37,7 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
 
     <div class="container">
       <router-view></router-view>
@@ -60,11 +79,11 @@
 
 <style lang="scss">
 .top-right {
-  text-align: right;
-  // position: absolute;
-  // right: 10px;
-  // top: 18px;
-  // z-index: 100;
+  // text-align: right;
+  position: absolute;
+  right: 10px;
+  top: 18px;
+  z-index: 100;
 }
 
 // .basic-layout {

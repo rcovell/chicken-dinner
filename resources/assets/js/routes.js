@@ -13,7 +13,8 @@ const routes = [
   {
     path: '/about',
     name: 'about',
-    component: about
+    component: about,
+    meta: { middlewareAuth: true }
   },
   {
     path: '/dashboard',

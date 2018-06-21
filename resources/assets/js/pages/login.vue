@@ -82,8 +82,18 @@ export default {
   //   LoginWithGithub
   // },
 
-  metaInfo () {
-    // return { title: this.$t('login') }
+  // metaInfo () {
+  //   // return { title: this.$t('login') }
+  // },
+
+  created() {
+    //
+  },
+
+  mounted() {
+    if (this.$route.query.redirect) {
+      this.redirect = this.$route.query.redirect;
+    }
   },
 
   data: () => ({
@@ -92,6 +102,8 @@ export default {
       password: '',
     },
     remember: false,
+    redirect: '',
+    newOptionNameSelected: 99999,
   }),
 
   methods: {
@@ -99,13 +111,12 @@ export default {
       try {
         const { data } = await axios.post('/api/login', this.form)
         auth.login(data.token, data.user)
-        this.$router.push('/')
+        // this.$router.push('/')
+        this.$router.push(this.redirect)
       }
       catch (error) {
         console.log(error.response.data.message)
       }
-
-
 
       // Submit the form.
       // const { data } = await this.form.post('/api/login')

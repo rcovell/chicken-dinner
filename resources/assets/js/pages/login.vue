@@ -102,7 +102,7 @@ export default {
       password: '',
     },
     remember: false,
-    redirect: '',
+    redirect: '/',
     newOptionNameSelected: 99999,
   }),
 

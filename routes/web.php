@@ -11,15 +11,15 @@
 |
 */
 
-Route::get('/', function () {
-  return view('welcome');
-});
-
-Route::get('/home', function () {
-    return view('home');
-})->name('home');
+// Route::get('/', function () {
+//   return view('welcome');
+// });
+//
+// Route::get('/home', function () {
+//     return view('home');
+// })->name('home');
 
 // Auth::routes();
 
-// Route::get('/{any}', 'SpaController@index')->where('any', '.*');
-Route::get('/login-page', 'SpaController@index')->where('any', '.*');
+Route::get('/{any}', 'SpaController@index')->where('any', '.*');
+// Route::get('/login', 'SpaController@index')->where('any', '.*');

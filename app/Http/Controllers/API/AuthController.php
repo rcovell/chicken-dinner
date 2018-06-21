@@ -60,7 +60,7 @@ class AuthController extends Controller
   {
     $accessToken = auth()->user()->token();
 
-    $refreshToken = DB::table('oauth_refresh_tokens')
+    $refreshToken = \DB::table('oauth_refresh_tokens')
       ->where('access_token_id', $accessToken->id)
       ->update([
           'revoked' => true
@@ -80,5 +80,10 @@ class AuthController extends Controller
     ]);
 
     return response()->json(['status' => 201]);
+  }
+
+  public function getUser()
+  {
+    return auth()->user();
   }
 }

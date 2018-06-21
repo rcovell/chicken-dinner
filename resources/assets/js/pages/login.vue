@@ -74,8 +74,6 @@
 </template>
 
 <script>
-// import Form from 'vform'
-// import LoginWithGithub from '~/components/LoginWithGithub'
 
 export default {
   // middleware: 'guest',
@@ -89,10 +87,6 @@ export default {
   },
 
   data: () => ({
-    // form: new Form({
-    //   email: '',
-    //   password: ''
-    // }),
     form: {
       username: '',
       password: '',
@@ -102,23 +96,13 @@ export default {
 
   methods: {
     async login () {
-      // const { data } = await axios.post('/api/login', this.form).catch((err) => { console.log(err) })
-      // const data = await axios.post('/api/login', this.form).catch((err) => { console.log(err) })
       try {
         const { data } = await axios.post('/api/login', this.form)
         auth.login(data.token, data.user)
-        // console.log('data')
-        // console.log(data)
+        this.$router.push('/')
       }
       catch (error) {
-        // console.log('error.config')
-        // console.log(error.config)
-        // console.log('error.request')
-        // console.log(error.request)
-        // console.log('error.response')
-        // console.log(error.response)
         console.log(error.response.data.message)
-        // console.log(Object.keys(error), error.message);
       }
 
 

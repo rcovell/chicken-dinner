@@ -14,13 +14,12 @@
               <router-link :to="{ name: 'dashboard' }">Dashboard</router-link> |
             </span>
             <span v-if="authenticated && user">
-                <p>Hello, {{ user.name }}</p>
+              <p>Hello, {{ user.name }}</p>
 
-                <a @click.prevent="logout" class="dropdown-item pl-3"  href="logout">
-                  <!-- <fa icon="sign-out-alt" fixed-width/> -->
-                  Logout
-                </a>
-                <!-- <router-link to="/logout">Logout</router-link> -->
+              <a @click.prevent="logout" class="dropdown-item pl-3"  href="logout">
+                <!-- <fa icon="sign-out-alt" fixed-width/> -->
+                Logout
+              </a>
             </span>
             <router-link to="/login" v-else>Login</router-link>
           </p>

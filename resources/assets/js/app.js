@@ -9,6 +9,9 @@
 
 require('./bootstrap');
 
+import Api from './api.js';
+window.api = new Api();
+
 import Auth from './auth.js';
 window.auth = new Auth();
 

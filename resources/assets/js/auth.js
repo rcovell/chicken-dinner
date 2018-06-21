@@ -25,14 +25,9 @@ class Auth {
     return !! this.token;
   }
   getUser() {
-    axios.get('/api/get-user')
+    api.call('get', '/api/get-user')
       .then(({user}) => {
         this.user = user;
-      })
-      .catch(({response}) => {
-        if (response.status === 401) {
-            this.logout();
-        }
       });
   }
   logout () {

@@ -74,51 +74,53 @@
 </template>
 
 <script>
-
-export default {
-  data: () => ({
-    form: {
-      username: '',
-      password: '',
+  export default {
+    data: () => ({
+      form: {
+        username: '',
+        password: '',
+      },
+      remember: false,
+      redirect: '/',
+    }),
+    created() {
+      //
     },
-    remember: false,
-    redirect: '/',
-    // newOptionNameSelected: 99999,
-  }),
-  created() {
-    //
-  },
-  mounted() {
-    if (this.$route.query.redirect) {
-      this.redirect = this.$route.query.redirect;
-    }
-  },
-  methods: {
-    async login () {
-      try {
-        const { data } = await axios.post('/api/login', this.form)
-        auth.login(data.token, data.user)
-        this.$router.push(this.redirect)
+    mounted() {
+      if (this.$route.query.redirect) {
+        this.redirect = this.$route.query.redirect;
       }
-      catch (error) {
-        console.log(error.response.data.message)
-      }
+    },
+    methods: {
+      async login () {
+        try {
+          const { data } = await axios.post('/api/login', this.form)
+          this.$store.dispatch('login', {
+            token: data.token,
+            user: data.user,
+          })
+          // remember: this.remember
+          this.$router.push(this.redirect)
+        }
+        catch (error) {
+          console.log(error.response.data.message)
+        }
 
-      // Submit the form.
-      // const { data } = await this.form.post('/api/login')
-      //
-      // // Save the token.
-      // this.$store.dispatch('auth/saveToken', {
-      //   token: data.token,
-      //   remember: this.remember
-      // })
-      //
-      // // Fetch the user.
-      // await this.$store.dispatch('auth/fetchUser')
-      //
-      // // Redirect home.
-      // this.$router.push({ name: 'home' })
+        // Submit the form.
+        // const { data } = await this.form.post('/api/login')
+        //
+        // // Save the token.
+        // this.$store.dispatch('auth/saveToken', {
+        //   token: data.token,
+        //   remember: this.remember
+        // })
+        //
+        // // Fetch the user.
+        // await this.$store.dispatch('auth/fetchUser')
+        //
+        // // Redirect home.
+        // this.$router.push({ name: 'home' })
+      }
     }
   }
-}
 </script>

@@ -1,4 +1,5 @@
 import VueRouter from 'vue-router';
+import store from './store/auth.js';
 import home from './pages/home.vue';
 import about from './pages/about.vue';
 import dashboard from './pages/dashboard.vue';
@@ -17,7 +18,6 @@ const routes = [
     path: '/about',
     name: 'about',
     component: about,
-    meta: { middlewareAuth: true }
   },
   {
     path: '/dashboard',
@@ -25,7 +25,7 @@ const routes = [
     component: dashboard,
     meta: { middlewareAuth: true }
   },
-  { path: '/settings', name: 'settings', component: settings, children: [
+  { path: '/settings', component: settings, children: [
       { path: '', redirect: { name: 'settings.profile' }},
       { path: 'profile', name: 'settings.profile', component: profile },
       { path: 'password', name: 'settings.password', component: password }
@@ -46,7 +46,7 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
   if (to.matched.some(record => record.meta.middlewareAuth)) {
-    if (!auth.check()) {
+    if (!store.getters.authenticated) {
       next({
         path: '/login',
         query: { redirect: to.fullPath }

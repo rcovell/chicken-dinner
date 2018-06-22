@@ -10,36 +10,27 @@
   import PrimaryNav from './PrimaryNav.vue';
 
   export default {
-    data() {
-      return {
-        authenticated: auth.check(),
-        user: auth.user
-      };
-    },
+    // data() {
+    //   return {
+    //     authenticated: auth.check(),
+    //     user: auth.user
+    //   };
+    // },
     mounted() {
-      Bus.$on('userLoggedIn', () => {
-        this.authenticated = true
-        this.user = auth.user
-      });
-      Bus.$on('userLogout', () => {
-        this.authenticated = false
-        this.user = {}
-      });
+      // Bus.$on('userLoggedIn', () => {
+      //   this.authenticated = true
+      //   this.user = auth.user
+      // });
+      // Bus.$on('userLogout', () => {
+      //   this.authenticated = false
+      //   this.user = {}
+      // });
     },
     components: {
       'primary-nav': PrimaryNav
     },
     methods: {
-      async logout () {
-        try {
-          const { data } = await axios.post('/api/logout')
-          auth.logout()
-          this.$router.push('/')
-        }
-        catch (error) {
-          console.log(error.response.data.message)
-        }
-      },
+      //
     }
   }
 </script>

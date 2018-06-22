@@ -8,7 +8,7 @@
           <span v-if="authenticated">
             <router-link :to="{ name: 'dashboard' }" class="nav-link" active-class>Dashboard</router-link> |
             <router-link :to="{ name: 'settings.profile' }" :class="{'router-link-active': subIsActive('/settings')}">Settings</router-link> |
-            <a @click.prevent="logout" class=""  href="logout">
+            <a @click.prevent="logout" href="logout">
               Logout
             </a>
           </span>
@@ -26,11 +26,23 @@
   </div>
 </template>
 <script>
+  import { mapGetters } from 'vuex'
+
   export default {
     mounted() {
       //
     },
     methods: {
+      async logout () {
+        try {
+          const { data } = await axios.post('/api/logout')
+          this.$store.dispatch('logout')
+          this.$router.push('/')
+        }
+        catch (error) {
+          console.log(error.response.data.message)
+        }
+      },
       subIsActive(input) {
         const paths = Array.isArray(input) ? input : [input]
         return paths.some(path => {
@@ -39,9 +51,14 @@
       }
     },
     computed: {
-      authenticated () {
-        return auth.check()
-      }
+      ...mapGetters({
+        authenticated: 'authenticated',
+      })
     }
+    // computed: {
+    //   authenticated () {
+    //     return auth.check()
+    //   }
+    // }
   }
 </script>

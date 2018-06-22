@@ -27,12 +27,6 @@
 </template>
 <script>
   export default {
-    props: {
-      'authenticated': {
-        type: Boolean,
-        default: false,
-      },
-    },
     mounted() {
       //
     },
@@ -42,6 +36,12 @@
         return paths.some(path => {
           return this.$route.path.indexOf(path) === 0
         })
+      }
+    },
+    computed: {
+      authenticated () {
+        console.log('asdf')
+        return auth.check()
       }
     }
   }

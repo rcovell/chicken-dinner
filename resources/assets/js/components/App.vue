@@ -1,6 +1,6 @@
 <template>
   <div>
-    <primary-nav :authenticated="authenticated"></primary-nav>
+    <primary-nav></primary-nav>
     <div class="container">
       <router-view></router-view>
     </div>

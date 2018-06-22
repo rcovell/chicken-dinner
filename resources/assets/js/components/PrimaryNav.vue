@@ -40,7 +40,6 @@
     },
     computed: {
       authenticated () {
-        console.log('asdf')
         return auth.check()
       }
     }

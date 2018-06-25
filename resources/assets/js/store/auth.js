@@ -9,22 +9,22 @@ const store = new Vuex.Store({
     user: {},
   },
   mutations: {
-    // initialiseStore(state) {
-		// 	if (window.localStorage.getItem('token')) {
-    //     state.token = window.localStorage.getItem('token');
-		// 	}
-    //   if (window.localStorage.getItem('user')) {
-    //     state.user = window.localStorage.getItem('user');
-		// 	}
-		// },
-    //TODO: Setting two variables is not optimal, rework
+    initialiseStore(state) {
+			if (window.localStorage.getItem('token')) {
+        state.token = window.localStorage.getItem('token');
+			}
+      if (window.localStorage.getItem('user')) {
+        state.user = window.localStorage.getItem('user');
+			}
+		},
     setToken (state, token) {
-      // state.token = token;
+      state.token = token;
+      //Store for later use
       window.localStorage.setItem('token', token);
     },
-    //TODO: Setting two variables is not optimal, rework
     setUser (state, user) {
-      // state.user = user;
+      state.user = user;
+      //Store for later use
       window.localStorage.setItem('user', user);
     },
   },
@@ -46,15 +46,15 @@ const store = new Vuex.Store({
   },
   getters: {
     token: state => {
-      // return state.token;
-      return window.localStorage.getItem('token');
+      return state.token;
+      // return window.localStorage.getItem('token');
     },
     user: state => {
-      // return state.user;
-      return window.localStorage.getItem('user');
+      return state.user;
+      // return window.localStorage.getItem('user');
     },
-    // authenticated: state => !! state.token,
-    authenticated: state => !! window.localStorage.getItem('token'),
+    authenticated: state => !! state.token,
+    // authenticated: state => !! window.localStorage.getItem('token'),
   }
 });
 

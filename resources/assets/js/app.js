@@ -28,7 +28,7 @@ const app = new Vue({
   store,
   router,
   beforeCreate() {
-		// this.$store.commit('initialiseStore');
+		this.$store.commit('initialiseStore');
 	},
   mounted() {
     //

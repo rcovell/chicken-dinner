@@ -10,22 +10,17 @@ const store = new Vuex.Store({
   },
   mutations: {
     initialiseStore(state) {
-			if (window.localStorage.getItem('token')) {
-        state.token = window.localStorage.getItem('token');
-			}
-      if (window.localStorage.getItem('user')) {
-        state.user = window.localStorage.getItem('user');
+      if(window.localStorage.getItem('store')) {
+				this.replaceState(
+					Object.assign(state, JSON.parse(window.localStorage.getItem('store')))
+				);
 			}
 		},
     setToken (state, token) {
       state.token = token;
-      //Store for later use
-      window.localStorage.setItem('token', token);
     },
     setUser (state, user) {
       state.user = user;
-      //Store for later use
-      window.localStorage.setItem('user', user);
     },
   },
   actions: {
@@ -55,16 +50,8 @@ const store = new Vuex.Store({
   }
 });
 
-// Subscribe to store updates
-// store.subscribe((mutation, state) => {
-//   console.log('mutation.type');
-//   console.log(mutation.type);
-//   console.log('mutation.payload');
-//   console.log(mutation.payload);
-//   console.log('state');
-//   console.log(state);
-// 	Store the state object as a JSON string
-// 	localStorage.setItem('token', token);
-// });
+store.subscribe((mutation, state) => {
+  window.localStorage.setItem('store', JSON.stringify(state));
+});
 
 export default store;

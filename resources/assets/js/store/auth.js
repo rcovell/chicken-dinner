@@ -47,14 +47,11 @@ const store = new Vuex.Store({
   getters: {
     token: state => {
       return state.token;
-      // return window.localStorage.getItem('token');
     },
     user: state => {
       return state.user;
-      // return window.localStorage.getItem('user');
     },
     authenticated: state => !! state.token,
-    // authenticated: state => !! window.localStorage.getItem('token'),
   }
 });
 

@@ -4,7 +4,7 @@
       <!-- <card :title="$t('login')"> -->
       <div class="panel panel-default">
         <div class="panel-heading">
-          <h3 class="panel-title">Your Profile</h3>
+          <h3 class="panel-title">Update Your Profile</h3>
         </div>
 
         <div class="panel-body">
@@ -55,8 +55,6 @@
         name: '',
         email: '',
       },
-      remember: false,
-      redirect: '/',
     }),
     created () {
       Object.keys(this.form).forEach(key => {

@@ -45,8 +45,13 @@ const router = new VueRouter({
 });
 
 router.beforeEach((to, from, next) => {
+  let token = '';
+  if(window.localStorage.getItem('store')) {
+    const localStorageStore = JSON.parse(window.localStorage.getItem('store'));
+    token = localStorageStore.token;
+  }
   if (to.matched.some(record => record.meta.middlewareAuth)) {
-    if (!store.getters.authenticated) {
+    if (!token) {
       next({
         path: '/login',
         query: { redirect: to.fullPath }

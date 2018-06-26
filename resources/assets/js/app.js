@@ -16,8 +16,8 @@ Vue.use(VueRouter);
 Vue.use(Vuex);
 
 import App from './components/App.vue';
-import router from './routes.js';
 import store from './store/auth.js';
+import router from './routes.js';
 import './plugins/axios.js';
 
 const app = new Vue({
@@ -30,6 +30,9 @@ const app = new Vue({
   beforeCreate() {
 		this.$store.commit('initialiseStore');
 	},
+  created() {
+    //
+  },
   mounted() {
     //
   },

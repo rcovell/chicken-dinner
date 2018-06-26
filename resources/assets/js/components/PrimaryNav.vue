@@ -37,7 +37,7 @@
         try {
           const { data } = await axios.post('/api/logout')
           this.$store.dispatch('logout')
-          this.$router.push('/')
+          this.$router.push({ name: 'home' })
         }
         catch (error) {
           console.log(error.response.data.message)

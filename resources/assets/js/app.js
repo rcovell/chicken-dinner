@@ -18,10 +18,10 @@ Vue.use(Vuex);
 import App from './components/App.vue';
 
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faUser, faLock } from '@fortawesome/free-solid-svg-icons'
+import { faUser, faLock, faSignOutAlt, faCog } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
-library.add(faUser, faLock)
+library.add(faUser, faLock, faSignOutAlt, faCog)
 Vue.component('fa', FontAwesomeIcon)
 Vue.config.productionTip = false
 

@@ -2,3 +2,40 @@
 .router-link-exact-active {
   font-weight: bolder;
 }
+
+.svg-inline--fa {
+  font-size: 2.2rem;
+  margin-right: .5rem;
+}
+
+.dropdown-menu {
+  // padding-top: 0;
+
+  .svg-inline--fa {
+    font-size: inherit;
+  }
+}
+
+.dropdown-toggle {
+  .svg-inline--fa {
+    font-size: inherit;
+  }
+}
+
+.navbar-nav {
+  float: right;
+}
+
+ul {
+  &.nav {
+    li {
+      .router-link-exact-active {
+        background-color:  $panel-active-link-bg;
+      }
+
+      a {
+        font-size: 16px;
+      }
+    }
+  }
+}

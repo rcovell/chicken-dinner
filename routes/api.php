@@ -17,8 +17,10 @@ Route::post('/register', 'API\AuthController@register');
 Route::post('/login', 'API\AuthController@login');
 
 Route::middleware('auth:api')->group(function () {
-    Route::post('/logout', 'API\AuthController@logout');
-    Route::get('/get-user', 'API\AuthController@getUser');
+  Route::post('/logout', 'API\AuthController@logout');
+  Route::get('/get-user', 'API\AuthController@getUser');
+  Route::patch('/settings/profile', 'API\ProfileController@update');
+  // Route::patch('/settings/password', 'API\PasswordController@update');
 });
 
 // Route::middleware('auth:api')->get('/user', function (Request $request) {

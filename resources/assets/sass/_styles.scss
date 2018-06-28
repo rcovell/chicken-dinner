@@ -9,8 +9,6 @@
 }
 
 .dropdown-menu {
-  // padding-top: 0;
-
   .svg-inline--fa {
     font-size: inherit;
   }
@@ -37,5 +35,11 @@ ul {
         font-size: 16px;
       }
     }
+  }
+}
+
+.panel-body {
+  label {
+    line-height: 3.5rem;
   }
 }

@@ -18,16 +18,17 @@ Vue.use(Vuex);
 import App from './components/App.vue';
 
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faUser, faLock, faSignOutAlt, faCog } from '@fortawesome/free-solid-svg-icons'
+import { faUser, faUsers, faLock, faSignOutAlt, faCog } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
-library.add(faUser, faLock, faSignOutAlt, faCog)
+library.add(faUser, faUsers, faLock, faSignOutAlt, faCog)
 Vue.component('fa', FontAwesomeIcon)
 Vue.config.productionTip = false
 
 import store from './store/auth.js';
 import router from './routes.js';
 import './plugins/axios.js';
+import { mapGetters } from 'vuex'
 
 const app = new Vue({
   el: '#app',
@@ -40,9 +41,22 @@ const app = new Vue({
 		this.$store.commit('initialiseStore');
 	},
   created() {
-    //
+    this.getUser();
   },
   mounted() {
     //
   },
+  computed: {
+    ...mapGetters({
+      authenticated: 'authenticated',
+    })
+  },
+  methods: {
+    async getUser () {
+      if (this.authenticated) {
+        const { data } = await axios.get('/api/get-user');
+        this.$store.dispatch('setUser', data);
+      }
+    }
+  }
 });

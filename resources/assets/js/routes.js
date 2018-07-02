@@ -46,9 +46,8 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
   let token = '';
-  if(window.localStorage.getItem('store')) {
-    const localStorageStore = JSON.parse(window.localStorage.getItem('store'));
-    token = localStorageStore.token;
+  if (window.localStorage.getItem('token')) {
+    token = window.localStorage.getItem('token');
   }
   if (to.matched.some(record => record.meta.middlewareAuth)) {
     if (!token) {

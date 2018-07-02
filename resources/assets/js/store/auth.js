@@ -10,11 +10,9 @@ const store = new Vuex.Store({
   },
   mutations: {
     initialiseStore(state) {
-      if(window.localStorage.getItem('store')) {
-				this.replaceState(
-					Object.assign(state, JSON.parse(window.localStorage.getItem('store')))
-				);
-			}
+      if (window.localStorage.getItem('token')) {
+        state.token = window.localStorage.getItem('token');
+      }
 		},
     setToken (state, token) {
       state.token = token;
@@ -51,7 +49,9 @@ const store = new Vuex.Store({
 });
 
 store.subscribe((mutation, state) => {
-  window.localStorage.setItem('store', JSON.stringify(state));
+  if (mutation.type === 'setToken') {
+    window.localStorage.setItem('token', mutation.payload);
+  }
 });
 
 export default store;

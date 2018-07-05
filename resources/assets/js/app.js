@@ -28,35 +28,12 @@ Vue.config.productionTip = false
 import store from './store/auth.js';
 import router from './routes.js';
 import './plugins/axios.js';
-import { mapGetters } from 'vuex'
 
 const app = new Vue({
-  el: '#app',
-  components: {
-    'app' : App,
-  },
   store,
   router,
+  ...App,
   beforeCreate() {
 		this.$store.commit('initialiseStore');
 	},
-  created() {
-    this.getUser();
-  },
-  mounted() {
-    //
-  },
-  computed: {
-    ...mapGetters({
-      authenticated: 'authenticated',
-    })
-  },
-  methods: {
-    async getUser () {
-      if (this.authenticated) {
-        const { data } = await axios.get('/api/get-user');
-        this.$store.dispatch('setUser', data);
-      }
-    }
-  }
 });

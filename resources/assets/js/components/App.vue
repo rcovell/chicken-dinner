@@ -1,5 +1,7 @@
 <template>
-  <div>
+  <!-- <div> -->
+  <div id="app">
+    <loading ref="loading"/>
     <primary-nav></primary-nav>
     <div class="container">
       <router-view></router-view>
@@ -7,30 +9,35 @@
   </div>
 </template>
 <script>
+  import Loading from './Loading.vue'
   import PrimaryNav from './PrimaryNav.vue';
+  import { mapGetters } from 'vuex'
 
   export default {
-    // data() {
-    //   return {
-    //     authenticated: auth.check(),
-    //     user: auth.user
-    //   };
-    // },
-    mounted() {
-      // Bus.$on('userLoggedIn', () => {
-      //   this.authenticated = true
-      //   this.user = auth.user
-      // });
-      // Bus.$on('userLogout', () => {
-      //   this.authenticated = false
-      //   this.user = {}
-      // });
-    },
+    el: '#app',
     components: {
-      'primary-nav': PrimaryNav
+      Loading,
+      PrimaryNav
+    },
+    created() {
+      console.log('App.vue created');
+      this.getUser();
+    },
+    mounted() {
+      this.$loading = this.$refs.loading;
+    },
+    computed: {
+      ...mapGetters({
+        authenticated: 'authenticated',
+      })
     },
     methods: {
-      //
+      async getUser () {
+        if (this.authenticated) {
+          const { data } = await axios.get('/api/get-user');
+          this.$store.dispatch('setUser', data);
+        }
+      }
     }
   }
 </script>

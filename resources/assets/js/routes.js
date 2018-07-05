@@ -39,12 +39,43 @@ const routes = [
   },
 ];
 
-const router = new VueRouter({
-  mode: 'history',
-  routes
-});
+const router = createRouter()
 
-router.beforeEach((to, from, next) => {
+export default router
+
+/**
+ * Create a new router instance.
+ *
+ * @return {VueRouter}
+ */
+function createRouter () {
+  const router = new VueRouter({
+    // scrollBehavior,
+    mode: 'history',
+    routes
+  })
+
+  router.beforeEach(beforeEach)
+  router.afterEach(afterEach)
+
+  return router
+}
+
+async function beforeEach (to, from, next) {
+  // Get the matched components and resolve them.
+  const components = await resolveComponents(
+    router.getMatchedComponents({ ...to })
+  )
+
+  if (components.length === 0) {
+    return next()
+  }
+
+  // Start the loading bar.
+  if (components[components.length - 1].loading !== false) {
+    router.app.$nextTick(() => router.app.$loading.start())
+  }
+
   let token = '';
   if (window.localStorage.getItem('token')) {
     token = window.localStorage.getItem('token');
@@ -59,6 +90,29 @@ router.beforeEach((to, from, next) => {
     }
   }
   next();
-})
+};
 
-export default router;
+/**
+ * Global after hook.
+ *
+ * @param {Route} to
+ * @param {Route} from
+ * @param {Function} next
+ */
+async function afterEach (to, from, next) {
+  await router.app.$nextTick()
+
+  router.app.$loading.finish()
+}
+
+/**
+ * Resolve async components.
+ *
+ * @param  {Array} components
+ * @return {Array}
+ */
+async function resolveComponents (components) {
+  return await Promise.all(components.map(async component => {
+    return typeof component === 'function' ? await component() : component
+  }))
+}

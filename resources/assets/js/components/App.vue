@@ -20,7 +20,6 @@
       PrimaryNav
     },
     created() {
-      console.log('App.vue created');
       this.getUser();
     },
     mounted() {

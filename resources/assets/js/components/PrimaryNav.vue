@@ -67,6 +67,7 @@
           this.$router.push({ name: 'home' })
         }
         catch (error) {
+          console.log('Error: Could not log out.')
           console.log(error.response.data.message)
         }
       },
@@ -83,10 +84,5 @@
         authenticated: 'authenticated',
       })
     }
-    // computed: {
-    //   authenticated () {
-    //     return auth.check()
-    //   }
-    // }
   }
 </script>

@@ -15,6 +15,12 @@
                 <li>
                   <router-link :to="{ name: 'settings.password' }" class="nav-link" active-class><fa icon="lock" fixed-width/>Password</router-link>
                 </li>
+                <li>
+                  <router-link :to="{ name: 'settings.profile' }" class="nav-link" active-class><fa icon="users" fixed-width/>Users</router-link>
+                </li>
+                <!-- <li>
+                  <a @click.prevent="logout" href="logout"><fa icon="sign-out-alt" fixed-width/>Logout</a>
+                </li> -->
               </ul>
             </div>
           </div>
